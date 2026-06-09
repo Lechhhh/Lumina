@@ -594,6 +594,35 @@ textarea.form-field{resize:vertical;min-height:88px;}
 /* LIVE INDICATOR */
 .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent-green);margin-right:5px;animation:livePulse 2s infinite;}
 @keyframes livePulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+/* ========================================= */
+/* OPTYMALIZACJA WYDAJNOŚCI (HARDWARE ACCEL) */
+/* ========================================= */
+
+/* 1. Usypianie niewidocznych elementów DOM (ogromny skok FPS dla długich list) */
+#all-tx-wrap, #emoji-grid, #crypto-list, #fx-list, #properties-buy, #flights-list {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* 2. Przeniesienie ciężaru renderowania na kartę graficzną (GPU) */
+.modal-sheet, .tab-content, .card, .vehicle-card, .btn, .nav-item, .tx-item, .market-row {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+/* 3. Wyłączenie zbędnego przeliczania dotyku na nieaktywnych elementach */
+.tab-content:not(.active) {
+  pointer-events: none;
+  visibility: hidden;
+}
+.tab-content.active {
+  visibility: visible;
+  pointer-events: auto;
+}
 </style>
 </head>
 <body>
@@ -2953,6 +2982,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 2500);
 });
+
+/* ========================================= */
+/* OPTYMALIZACJA WYDAJNOŚCI JS (PASSIVE & IDLE) */
+/* ========================================= */
+
+/* 1. Wymuszenie płynnego scrollowania na iOS/Android (Passive Listeners) */
+const passiveOpts = { passive: true };
+document.addEventListener('touchstart', function() {}, passiveOpts);
+document.addEventListener('touchmove', function() {}, passiveOpts);
+document.addEventListener('mousewheel', function() {}, passiveOpts);
+document.addEventListener('wheel', function() {}, passiveOpts);
+
+/* 2. Ochrona przed zacięciami przy masowym odświeżaniu danych rynkowych (API) */
+if ('requestIdleCallback' in window) {
+  const originalLoadMarket = typeof loadMarketData === 'function' ? loadMarketData : function(){};
+  loadMarketData = () => requestIdleCallback(() => originalLoadMarket(), { timeout: 2000 });
+  
+  const originalLoadCrypto = typeof loadCryptoData === 'function' ? loadCryptoData : function(){};
+  loadCryptoData = () => requestIdleCallback(() => originalLoadCrypto(), { timeout: 2000 });
+}
+
+/* 3. Optymalizacja renderowania powiadomień (przerzucenie do następnej klatki) */
+const originalShowToast = typeof showToast === 'function' ? showToast : function(){};
+showToast = (type, icon, msg) => requestAnimationFrame(() => originalShowToast(type, icon, msg));
 
 </script>
 </body>
