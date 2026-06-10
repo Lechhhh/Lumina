@@ -591,7 +591,7 @@ textarea.form-field{resize:vertical;min-height:88px;}
 @media(min-width:600px){.grid-2{grid-template-columns:1fr 1fr;}}
 
 /* ENTRANCE ANIMATIONS — use only transform+opacity for GPU */
-.anim-in{opacity:0;transform:translateY(16px);animation:animIn 0.4s var(--ease-out) forwards;}
+.anim-in{opacity:1 !important;transform:none !important;animation:none !important;}
 @keyframes animIn{to{opacity:1;transform:translateY(0);}}
 .anim-delay-1{animation-delay:0.05s;}.anim-delay-2{animation-delay:0.10s;}.anim-delay-3{animation-delay:0.15s;}.anim-delay-4{animation-delay:0.20s;}.anim-delay-5{animation-delay:0.25s;}
 .shimmer{background:linear-gradient(90deg,var(--bg-input) 0%,var(--bg-hover) 50%,var(--bg-input) 100%);background-size:200% 100%;animation:shimmerLoad 1.4s infinite;border-radius:var(--r-sm);}
@@ -1217,11 +1217,11 @@ textarea.form-field{resize:vertical;min-height:88px;}
     <div class="modal-body">
       <div class="form-group"><label class="form-label">Nazwa celu</label><input class="form-field" id="goal-name" placeholder="np. Wakacje na Malediwach..."></div>
       <div class="form-group"><label class="form-label">Emoji</label>
-        <div class="emoji-field-wrap">
-          <button type="button" class="emoji-preview-btn" id="goal-emoji-btn" onclick="openEmojiPicker('goal-emoji-btn','goal-emoji-val')">🎯</button>
-          <input type="hidden" id="goal-emoji-val" value="🎯">
-          <input class="form-field" id="goal-name-display" style="flex:1;" disabled placeholder="Wybierz emoji klikając przycisk">
-        </div>
+<div class="emoji-field-wrap">
+  <button type="button" class="emoji-preview-btn" id="goal-emoji-btn" onclick="openEmojiPicker('goal-emoji-btn','goal-emoji-val')">&#x1F3AF;</button>
+  <input type="hidden" id="goal-emoji-val" value="&#x1F3AF;">
+  <input class="form-field" id="goal-name-display" style="flex:1;" disabled placeholder="Wybierz emoji klikając przycisk">
+</div>
       </div>
       <div class="form-group"><label class="form-label">Kwota docelowa (zł)</label><input class="form-field" type="number" id="goal-target" placeholder="10000"></div>
       <div class="form-group"><label class="form-label">Już zebrałem (zł)</label><input class="form-field" type="number" id="goal-current" placeholder="0" value="0"></div>
@@ -1238,11 +1238,11 @@ textarea.form-field{resize:vertical;min-height:88px;}
     <div class="modal-body">
       <div class="form-group"><label class="form-label">Nazwa</label><input class="form-field" id="sub-name" placeholder="np. Netflix, Spotify, Siłownia..."></div>
       <div class="form-group"><label class="form-label">Logo emoji</label>
-        <div class="emoji-field-wrap">
-          <button type="button" class="emoji-preview-btn" id="sub-logo-btn" onclick="openEmojiPicker('sub-logo-btn','sub-logo-val')">🎬</button>
-          <input type="hidden" id="sub-logo-val" value="🎬">
-          <span class="text-sm text-muted" style="line-height:1.4;">Kliknij ikonę by zmienić emoji</span>
-        </div>
+<div class="emoji-field-wrap">
+  <button type="button" class="emoji-preview-btn" id="goal-emoji-btn" onclick="openEmojiPicker('goal-emoji-btn','goal-emoji-val')">&#x1F3AF;</button>
+  <input type="hidden" id="goal-emoji-val" value="&#x1F3AF;">
+  <input class="form-field" id="goal-name-display" style="flex:1;" disabled placeholder="Wybierz emoji klikając przycisk">
+</div>
       </div>
       <div class="form-group"><label class="form-label">Koszt miesięczny (zł)</label><input class="form-field" type="number" id="sub-cost-inp" placeholder="49.99" step="0.01"></div>
       <div class="form-group"><label class="form-label">Cykl płatności</label><select class="form-field form-select" id="sub-billing"><option value="monthly">Miesięcznie</option><option value="yearly">Rocznie</option><option value="weekly">Tygodniowo</option></select></div>
@@ -1288,10 +1288,10 @@ textarea.form-field{resize:vertical;min-height:88px;}
       <div class="form-group"><label class="form-label">Rodzaj paliwa</label><select class="form-field form-select" id="veh-fuel"><option>Benzyna</option><option>Diesel</option><option>Hybrid</option><option>Elektryczny</option><option>LPG</option></select></div>
       <div class="form-group"><label class="form-label">Emoji pojazdu</label>
         <div class="emoji-field-wrap">
-          <button type="button" class="emoji-preview-btn" id="veh-emoji-btn" onclick="openEmojiPicker('veh-emoji-btn','veh-emoji-val')">🚗</button>
-          <input type="hidden" id="veh-emoji-val" value="🚗">
-          <span class="text-sm text-muted">Kliknij by wybrać ikonę pojazdu</span>
-        </div>
+  <button type="button" class="emoji-preview-btn" id="veh-emoji-btn" onclick="openEmojiPicker('veh-emoji-btn','veh-emoji-val')">&#x1F697;</button>
+  <input type="hidden" id="veh-emoji-val" value="&#x1F697;">
+  <span class="text-sm text-muted">Kliknij by wybrać ikonę pojazdu</span>
+</div>
       </div>
     </div>
     <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('add-vehicle-modal')">Anuluj</button><button class="btn btn-primary" onclick="addVehicle()">✓ Dodaj</button></div>
@@ -1347,10 +1347,10 @@ textarea.form-field{resize:vertical;min-height:88px;}
       <div class="form-group"><label class="form-label">Nazwa</label><input class="form-field" id="infra-name" placeholder="np. VPS Hetzner..."></div>
       <div class="form-group"><label class="form-label">Szczegóły</label><input class="form-field" id="infra-meta" placeholder="np. 2 vCPU · 4GB · 45 zł/mies"></div>
       <div class="form-group"><label class="form-label">Emoji</label>
-        <div class="emoji-field-wrap">
-          <button type="button" class="emoji-preview-btn" id="infra-icon-btn" onclick="openEmojiPicker('infra-icon-btn','infra-icon-val')">🖥</button>
-          <input type="hidden" id="infra-icon-val" value="🖥">
-        </div>
+<div class="emoji-field-wrap">
+  <button type="button" class="emoji-preview-btn" id="infra-icon-btn" onclick="openEmojiPicker('infra-icon-btn','infra-icon-val')">&#x1F5A5;</button>
+  <input type="hidden" id="infra-icon-val" value="&#x1F5A5;">
+</div>
       </div>
       <div class="form-group"><label class="form-label">Status</label><select class="form-field form-select" id="infra-status"><option value="ok">● Online</option><option value="warn">⚠ Wygasa</option></select></div>
     </div>
@@ -1594,18 +1594,51 @@ async function updateHashDisplay() {
   const el = document.getElementById('wallet-hash'); if (el) el.textContent = hash+'…e3f1';
 }
 
+// ===========================================
+// NIEZNISZCZALNE EMOJI I AKTUALIZACJA UI
+// ===========================================
 function updateUserUI() {
   const name = currentUser?.name||'Użytkownik';
   const firstName = name.split(' ')[0];
   const h = new Date().getHours();
   const greeting = h<12 ? 'Dzień dobry' : h<18 ? 'Dzień dobry' : 'Dobry wieczór';
-  const el = id => document.getElementById(id);
-  if (el('dashboard-greeting')) el('dashboard-greeting').textContent = `${greeting}, ${firstName} 👋`;
-  if (el('dashboard-date')) el('dashboard-date').textContent = new Date().toLocaleDateString('pl-PL',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  if (el('sidebar-avatar')) el('sidebar-avatar').textContent = name.charAt(0).toUpperCase();
-  if (el('sidebar-username')) el('sidebar-username').textContent = name;
-  if (el('logout-email-display')) el('logout-email-display').textContent = `Zalogowany jako: ${currentUser?.email||''}`;
+  
+  const el = document.getElementById('dashboard-greeting');
+  // Zabezpieczone emoji machającej dłoni
+  if (el) el.innerHTML = `${greeting}, ${firstName} &#x1F44B;`;
+  
+  const elDate = document.getElementById('dashboard-date');
+  if (elDate) elDate.textContent = new Date().toLocaleDateString('pl-PL',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  
+  const elAvatar = document.getElementById('sidebar-avatar');
+  if (elAvatar) elAvatar.textContent = name.charAt(0).toUpperCase();
+  
+  const elUsername = document.getElementById('sidebar-username');
+  if (elUsername) elUsername.textContent = name;
+  
+  const elLogout = document.getElementById('logout-email-display');
+  if (elLogout) elLogout.textContent = `Zalogowany jako: ${currentUser?.email||''}`;
 }
+
+// Zabezpieczenie ikon w dolnym i bocznym pasku natychmiast po załadowaniu
+document.addEventListener("DOMContentLoaded", () => {
+  // Dolny pasek nawigacji
+  const bnav = document.querySelectorAll('.bnav-icon');
+  if(bnav.length >= 5) {
+    bnav[0].innerHTML = '&#x1F4CA;'; bnav[1].innerHTML = '&#x1F4B0;'; 
+    bnav[2].innerHTML = '&#x2708;&#xFE0F;'; bnav[3].innerHTML = '&#x1F697;'; bnav[4].innerHTML = '&#x1F916;';
+  }
+  
+  // Boczny pasek nawigacji
+  const nav = document.querySelectorAll('.nav-icon');
+  const navHex = ['&#x1F4CA;','&#x1F4B0;','&#x1F3AF;','&#x1F501;','&#x1F6D2;','&#x2708;&#xFE0F;','&#x1F3E0;','&#x2764;&#xFE0F;','&#x1F4C8;','&#x1F697;','&#x1F4BB;','&#x1F4F7;','&#x1F4C2;','&#x1F916;'];
+  nav.forEach((el, i) => { if(navHex[i]) el.innerHTML = navHex[i]; });
+
+  // Szybkie akcje (kolorowe kafelki) na dashboardzie
+  const qa = document.querySelectorAll('.qa-icon');
+  const qaHex = ['&#x1F4B8;','&#x1F504;','&#x1F4F7;','&#x2708;&#xFE0F;','&#x1F3AF;','&#x2764;&#xFE0F;','&#x1F6D2;','&#x1F916;'];
+  qa.forEach((el, i) => { if(qaHex[i]) el.innerHTML = qaHex[i]; });
+});
 
 function renderAll() {
   updateStats(); renderTransactions(); renderBudgetCategories();
@@ -1849,40 +1882,44 @@ async function loadMarketData() {
 function refreshMarket(){loadMarketData();showToast('info','↻','Odświeżam kursy...');}
 
 let liveCrypto={};
+// ===========================================
+// KRYPTO NA ŻYWO (BINANCE API - BEZ LIMITÓW)
+// ===========================================
 async function loadCryptoData() {
-  const el=document.getElementById('crypto-list');if(!el)return;
-  const coins=['bitcoin','ethereum','solana','binancecoin','cardano','polygon'];
-  let data=[];
-  try{
-    const r=await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coins.join(',')}&order=market_cap_desc&sparkline=false&price_change_percentage=24h`,{signal:AbortSignal.timeout(6000)});
-    if(r.ok){
-      data=await r.json();
-      data.forEach(d=>{liveCrypto[d.id]={price:d.current_price,change:d.price_change_percentage_24h};});
+  const el = document.getElementById('crypto-list'); if(!el) return;
+  const symbols = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'BNBUSDT', 'ADAUSDT', 'MATICUSDT'];
+  const names = { BTCUSDT:{n:'Bitcoin',s:'BTC',i:'&#x20BF;'}, ETHUSDT:{n:'Ethereum',s:'ETH',i:'&#x039E;'}, SOLUSDT:{n:'Solana',s:'SOL',i:'&#x25CE;'}, BNBUSDT:{n:'BNB',s:'BNB',i:'B'}, ADAUSDT:{n:'Cardano',s:'ADA',i:'&#x20B3;'}, MATICUSDT:{n:'Polygon',s:'MATIC',i:'&#x25B2;'} };
+  
+  try {
+    const r = await fetch('https://api.binance.com/api/v3/ticker/24hr');
+    if(r.ok) {
+      const allData = await r.json();
+      const data = allData.filter(d => symbols.includes(d.symbol));
+      
+      data.sort((a,b) => symbols.indexOf(a.symbol) - symbols.indexOf(b.symbol));
+      
+      el.innerHTML = data.map(d => {
+        const info = names[d.symbol];
+        const price = parseFloat(d.lastPrice);
+        const chg = parseFloat(d.priceChangePercent);
+        const up = chg >= 0;
+        
+        liveCrypto[info.s.toLowerCase()] = { price: price, change: chg };
+        
+        return `<div class="market-row" onclick="renderAssetChart('${info.n.toLowerCase()}','${info.n} (${info.s})',${price})">
+          <span style="font-size:18px;min-width:28px;text-align:center;font-weight:700;">${info.i}</span>
+          <div><div class="market-symbol">${info.s}</div><div class="market-name">${info.n}</div></div>
+          <div class="market-price">$${price >= 1000 ? price.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) : price.toFixed(4)}</div>
+          <div class="market-change ${up?'up':'down'}">${up?'&#x25B2;':'&#x25BC;'} ${Math.abs(chg).toFixed(2)}%</div>
+        </div>`;
+      }).join('');
+      
+      const upd=document.getElementById('crypto-updated');
+      if(upd) upd.textContent=`Live: ${new Date().toLocaleTimeString('pl-PL')}`;
     }
-  }catch{}
-  if(!data.length){
-    data=[{id:'bitcoin',symbol:'btc',name:'Bitcoin',current_price:67450,price_change_percentage_24h:2.3,market_cap:1e12},
-         {id:'ethereum',symbol:'eth',name:'Ethereum',current_price:3520,price_change_percentage_24h:-1.1,market_cap:4e11},
-         {id:'solana',symbol:'sol',name:'Solana',current_price:168,price_change_percentage_24h:4.7,market_cap:8e10},
-         {id:'binancecoin',symbol:'bnb',name:'BNB',current_price:615,price_change_percentage_24h:0.8,market_cap:9e10},
-         {id:'cardano',symbol:'ada',name:'Cardano',current_price:0.48,price_change_percentage_24h:-2.3,market_cap:1.7e10},
-         {id:'polygon',symbol:'matic',name:'Polygon',current_price:0.89,price_change_percentage_24h:1.4,market_cap:8e9}];
+  } catch(e) {
+    el.innerHTML = '<div class="text-sm text-red p-4 text-center">Błąd API Binance. Brak połączenia.</div>';
   }
-  const symbolIcons={bitcoin:'₿',ethereum:'Ξ',solana:'◎',binancecoin:'B',cardano:'₳',polygon:'▲'};
-  el.innerHTML=data.map(d=>{
-    const chg=d.price_change_percentage_24h||0;
-    const up=chg>=0;
-    return `<div class="market-row" onclick="renderAssetChart('${d.id}','${d.name} (${d.symbol?.toUpperCase()})',${d.current_price})">
-      <span style="font-size:18px;min-width:28px;text-align:center;font-weight:700;">${symbolIcons[d.id]||'◈'}</span>
-      <div><div class="market-symbol">${d.symbol?.toUpperCase()}</div><div class="market-name">${d.name}</div></div>
-      <div class="market-price">$${d.current_price?.toLocaleString('en-US')}</div>
-      <div class="market-change ${up?'up':'down'}">${up?'▲':'▼'} ${Math.abs(chg).toFixed(1)}%</div>
-    </div>`;
-  }).join('');
-  // Auto-show first asset chart
-  if(data.length) renderAssetChart(data[0].id,`${data[0].name} (${data[0].symbol?.toUpperCase()})`,data[0].current_price);
-  const upd=document.getElementById('crypto-updated');
-  if(upd) upd.textContent=`Aktualizacja: ${new Date().toLocaleTimeString('pl-PL')}`;
 }
 
 function refreshCrypto(){loadCryptoData();showToast('info','↻','Odświeżam krypto...');}
@@ -2291,53 +2328,97 @@ function openTrainSearch() {
   window.open(`https://rozklad-pkp.pl/pl/tp?queryPageDisplayed=yes&REQ0JourneyStopsS0A=1&REQ0JourneyStopsS0G=${from}&REQ0JourneyStopsZ0A=1&REQ0JourneyStopsZ0G=${to}`, '_blank');
 }
 
-async function searchFlights(){
-  const list=document.getElementById('flights-list');
-  const badge=document.getElementById('flights-count-badge');
-  const from=document.getElementById('travel-from').value||'KRK';
-  const to=document.getElementById('travel-to').value||'BCN';
-  const date=document.getElementById('travel-date').value;
-  
-  list.innerHTML='<div class="card card-p"><div class="shimmer" style="height:60px;margin-bottom:10px;"></div><div class="shimmer" style="height:60px;margin-bottom:10px;"></div><div class="shimmer" style="height:60px;"></div><div class="text-sm text-muted mt-12 text-center">Łączenie z API przewoźników (Live)...</div></div>';
-  
-  // Symulacja pobierania danych z prawdziwych API (Skyscanner/Ryanair) w czasie rzeczywistym
+// ===========================================
+// DYNAMICZNE WYSZUKIWANIE LOTÓW (CZYTANIE INPUTÓW)
+// ===========================================
+async function searchFlights() {
+  const list = document.getElementById('flights-list');
+  const badge = document.getElementById('flights-count-badge');
+  const from = document.getElementById('travel-from').value.toUpperCase() || 'KRK';
+  const to = document.getElementById('travel-to').value.toUpperCase() || 'ALC';
+  let date = document.getElementById('travel-date').value;
+
+  if(!date) {
+    date = "2026-07-10"; // Default
+  }
+
+  list.innerHTML='<div class="card card-p"><div class="typing-dots" style="justify-content:center;"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div><div class="text-sm text-muted mt-12 text-center">Budowanie linków do zewnętrznych skanerów na żywo...</div></div>';
+
   setTimeout(()=>{
-    const basePrice = Math.floor(Math.random() * 300) + 150;
-    const flights=[
-      {air:'Ryanair',logo:'✈️',time:'06:30 - 09:40',dur:'3h 10m',price:basePrice,url:`https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=${date}&dateIn=&isConnectedFlight=false&isReturn=false&discount=0&promoCode=&originIata=${from}&destinationIata=${to}&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0&tpStartDate=${date}&tpEndDate=&tpDiscount=0&tpPromoCode=&tpOriginIata=${from}&tpDestinationIata=${to}`},
-      {air:'Wizz Air',logo:'🟣',time:'14:15 - 17:35',dur:'3h 20m',price:basePrice+80,url:`https://wizzair.com/pl-pl/`},
-      {air:'LOT',logo:'🦅',time:'10:00 - 13:30',dur:'3h 30m',price:basePrice+450,url:`https://www.lot.com/pl/pl/`}
-    ];
+    // Budujemy precyzyjne linki wywołujące wyszukiwanie (np. 260710 dla 10 lipca 2026)
+    const dObj = new Date(date);
+    const skyDateOut = dObj.getFullYear().toString().substring(2) + (dObj.getMonth()+1).toString().padStart(2,'0') + dObj.getDate().toString().padStart(2,'0');
     
-    badge.textContent=`${flights.length} loty`;
-    list.innerHTML=flights.map(f=>`
-      <div class="flight-card" onclick="window.open('${f.url}','_blank')">
+    // Ustawiamy powrót standardowo tydzień później
+    const dRet = new Date(dObj); dRet.setDate(dRet.getDate() + 7);
+    const skyDateIn = dRet.getFullYear().toString().substring(2) + (dRet.getMonth()+1).toString().padStart(2,'0') + dRet.getDate().toString().padStart(2,'0');
+
+    const skyscannerUrl = `https://www.skyscanner.pl/transport/loty/${from}/${to}/${skyDateOut}/${skyDateIn}/`;
+    const azairUrl = `https://www.azair.eu/azfin.php?searchtype=flexi&srcAirport=${from}&dstAirport=${to}&adults=2&depdate=${date}`;
+
+    badge.textContent=`Oferty Live`;
+    list.innerHTML=`
+      <div class="flight-card" onclick="window.open('${skyscannerUrl}','_blank')" style="border-color:var(--accent);">
         <div class="flex justify-between items-center mb-8">
-          <div class="flex items-center gap-8"><span style="font-size:20px;">${f.logo}</span><span class="font-bold">${f.air}</span></div>
-          <div class="text-green text-xs font-bold">● Oferta Live</div>
+          <div class="flex items-center gap-8"><span style="font-size:20px;">&#x2708;&#xFE0F;</span><span class="font-bold">Skyscanner (Wszystkie linie)</span></div>
+          <div class="text-green text-xs font-bold">&#x25CF; Sprawdź live</div>
         </div>
         <div class="flex justify-between items-center">
-          <div><div class="font-display font-bold text-lg">${f.time}</div><div class="text-sm text-muted">${from} ➔ ${to} · Bezpośredni (${f.dur})</div></div>
-          <div style="text-align:right;"><div class="font-display font-bold text-accent" style="font-size:22px;">${f.price} zł</div></div>
+          <div><div class="font-display font-bold text-lg">Dynamiczne wyszukiwanie</div><div class="text-sm text-muted">${from} &#x2794; ${to} | Otwiera wyniki</div></div>
+          <div style="text-align:right;"><button class="btn btn-primary btn-sm">Bilety</button></div>
         </div>
       </div>
-    `).join('');
-    
-    document.getElementById('direct-search-links').innerHTML=`
-      <a href="https://www.skyscanner.pl/transport/loty/${from}/${to}/${date.replace(/-/g,'').slice(2)}" target="_blank" class="btn btn-secondary btn-sm">Skyscanner</a>
-      <a href="https://www.azair.eu" target="_blank" class="btn btn-secondary btn-sm">Azair</a>
-      <a href="https://www.esky.pl" target="_blank" class="btn btn-secondary btn-sm">eSky</a>
+
+      <div class="flight-card" onclick="window.open('${azairUrl}','_blank')">
+        <div class="flex justify-between items-center mb-8">
+          <div class="flex items-center gap-8"><span style="font-size:20px;">&#x1F5FA;&#xFE0F;</span><span class="font-bold">Azair (Tylko Low-Cost)</span></div>
+          <div class="text-green text-xs font-bold">&#x25CF; Sprawdź live</div>
+        </div>
+        <div class="flex justify-between items-center">
+          <div><div class="font-display font-bold text-lg">Najtańsze połączenia</div><div class="text-sm text-muted">Ryanair, Wizz Air, EasyJet</div></div>
+          <div style="text-align:right;"><button class="btn btn-secondary btn-sm">Mapa</button></div>
+        </div>
+      </div>
     `;
-  }, 1200);
+
+    document.getElementById('direct-search-links').innerHTML=`
+      <a href="${skyscannerUrl}" target="_blank" class="btn btn-primary btn-sm w-full mb-8">Przejdź od razu do wyników biletów w Skyscanner</a>
+    `;
+  }, 600);
 }
 
-function renderTravelDeals(){
-  const fl=document.getElementById('hot-flight-deals');
-  if(fl) fl.innerHTML=[
-    {dest:'Mediolan (BGY)',price:'89 zł',img:'🍕',url:'https://www.ryanair.com'},
-    {dest:'Londyn (LTN)',price:'109 zł',img:'💂',url:'https://wizzair.com'},
-    {dest:'Zadar (ZAD)',price:'149 zł',img:'🏖️',url:'https://www.ryanair.com'}
-  ].map(d=>`<div class="deal-card" onclick="window.open('${d.url}','_blank')"><div class="deal-banner" style="background:var(--bg-input);">${d.img}<div class="deal-badge-hot">Błąd cenowy?</div></div><div class="deal-body"><div class="deal-title">${d.dest}</div><div class="deal-price">${d.price}</div><div class="text-xs text-muted mt-4">Lot w dwie strony</div></div></div>`).join('');
+// Podmień też pakiety, żeby przestały być statyczną Turcją
+function renderPackageDeals() { 
+  document.getElementById('package-deals').innerHTML=`
+  <div class="card card-p mb-16 flex items-center justify-between" style="border-color:var(--accent); cursor:pointer;" onclick="window.open('https://www.wakacje.pl/wczasy/','_blank')">
+    <div class="flex items-center gap-12"><span style="font-size:32px;">&#x1F3DD;&#xFE0F;</span><div><div class="font-bold">Wyszukiwarka All Inclusive</div><div class="text-sm text-muted">Przeszukaj tysiące aktualnych ofert</div></div></div>
+    <div class="font-display font-bold text-accent" style="font-size:16px;">Sprawdź &#x2794;</div>
+  </div>`; 
+}
+
+// ===========================================
+// GORĄCE OFERTY (DYNAMICZNY GENERATOR LINKÓW)
+// ===========================================
+function renderTravelDeals() {
+  const fl = document.getElementById('hot-flight-deals');
+  if(!fl) return;
+
+  // Matematyka na żywo: zawsze załatwia urlop za ok. miesiąc, np. od 10 do 17 lipca 
+  const today = new Date();
+  const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 10);
+  const returnDate = new Date(nextMonth);
+  returnDate.setDate(returnDate.getDate() + 7);
+
+  const fmt = (d) => d.getFullYear().toString().substring(2) + (d.getMonth()+1).toString().padStart(2,'0') + d.getDate().toString().padStart(2,'0');
+  const dOut = fmt(nextMonth);
+  const dIn = fmt(returnDate);
+
+  // Linki z parametrem adults=2 zawsze szukają najtańszej opcji na żywo
+  fl.innerHTML = [
+    {dest:'Grecja (Wszędzie)', img:'&#x2600;&#xFE0F;', url:`https://www.skyscanner.pl/transport/loty/krk/gr/${dOut}/${dIn}/?adults=2`},
+    {dest:'Włochy (Wszędzie)', img:'&#x1F355;', url:`https://www.skyscanner.pl/transport/loty/krk/it/${dOut}/${dIn}/?adults=2`},
+    {dest:'Hiszpania (Wszędzie)', img:'&#x1F3D6;&#xFE0F;', url:`https://www.skyscanner.pl/transport/loty/krk/es/${dOut}/${dIn}/?adults=2`}
+  ].map(d => `<div class="deal-card" onclick="window.open('${d.url}','_blank')"><div class="deal-banner" style="background:var(--bg-input);">${d.img}<div class="deal-badge-hot" style="background:var(--accent-green);">Live API</div></div><div class="deal-body"><div class="deal-title">${d.dest}</div><div class="deal-price">Sprawdź live</div><div class="text-xs text-muted mt-4">Cena za 2 osoby (Skyscanner)</div></div></div>`).join('');
 }
 
 function renderTrainLinks(){ document.getElementById('train-links').innerHTML=`<div class="btn btn-secondary flex-col gap-6" onclick="window.open('https://intercity.pl','_blank')"><span style="font-size:24px;">🚂</span><span>PKP Intercity</span></div><div class="btn btn-secondary flex-col gap-6" onclick="window.open('https://koleo.pl','_blank')"><span style="font-size:24px;">🎫</span><span>Koleo</span></div>`; }
@@ -2345,13 +2426,48 @@ function renderBusLinks(){ document.getElementById('bus-links').innerHTML=`<div 
 function renderHotelLinks(){ document.getElementById('hotel-links').innerHTML=`<div class="btn btn-secondary flex-col gap-6" onclick="window.open('https://booking.com','_blank')"><span style="font-size:24px;">🛏️</span><span>Booking.com</span></div><div class="btn btn-secondary flex-col gap-6" onclick="window.open('https://airbnb.com','_blank')"><span style="font-size:24px;">🏠</span><span>Airbnb</span></div>`; }
 function renderPackageDeals(){ document.getElementById('package-deals').innerHTML='<div class="card card-p mb-16 flex items-center justify-between" style="border-color:var(--accent);"><div class="flex items-center gap-12"><span style="font-size:32px;">🇹🇷</span><div><div class="font-bold">Turcja, Riwiera (7 dni)</div><div class="text-sm text-muted">All Inclusive · Samolot</div></div></div><div class="font-display font-bold text-accent" style="font-size:20px;">od 1490 zł</div></div>'; }
 
-async function getAITravelSuggestion(){
-  const prompt=document.getElementById('ai-travel-prompt')?.value?.trim();
-  const res=document.getElementById('ai-travel-result');
-  if(!prompt||!res)return;
+// ===========================================
+// DYNAMICZNY ASYSTENT PODRÓŻY (PARSER INTENCJI)
+// ===========================================
+// ===========================================
+// ASYSTENT AI - GENERATOR RADARU OKAZJI
+// ===========================================
+async function getAITravelSuggestion() {
+  const prompt = document.getElementById('ai-travel-prompt')?.value?.trim().toLowerCase();
+  const res = document.getElementById('ai-travel-result');
+  if(!prompt || !res) return;
   res.innerHTML='<div class="card card-p"><div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
-  const reply=await smartAIRequest(`Jako asystent podróży Lumina, odpowiedz na prośbę: "${prompt}". Wygeneruj konkretne 2 kierunki z prawdziwymi estymacjami cenowymi. Użyj formatowania HTML/Markdown z emoji.`);
-  res.innerHTML=`<div class="card card-p" style="background:var(--bg-tertiary);"><div style="font-size:13px;line-height:1.6;">${formatAIText(reply)}</div></div>`;
+  
+  setTimeout(() => {
+    // Odczytuje cyfry z tego co napisałeś
+    const budgetMatch = prompt.match(/\d+/g);
+    let budget = budgetMatch ? Math.max(...budgetMatch.map(Number)) : 0;
+
+    // Kalkuluje świeże daty urlopu (start: za 30 dni, powrót: +7 dni)
+    const dObj = new Date();
+    dObj.setDate(dObj.getDate() + 30); 
+    const skyDateOut = dObj.getFullYear().toString().substring(2) + (dObj.getMonth()+1).toString().padStart(2,'0') + dObj.getDate().toString().padStart(2,'0');
+    
+    const rDate = new Date(dObj); rDate.setDate(rDate.getDate() + 7); 
+    const skyDateIn = rDate.getFullYear().toString().substring(2) + (rDate.getMonth()+1).toString().padStart(2,'0') + rDate.getDate().toString().padStart(2,'0');
+    
+    const isoStart = dObj.toISOString().split('T')[0];
+    const isoEnd = rDate.toISOString().split('T')[0];
+
+    let suggestionHTML = '';
+
+    if(budget > 0) {
+       suggestionHTML = `Uruchamiam skaner cen live dla budżetu **${budget} zł**.<br><br>
+       Wszystkie poniższe linki są wygenerowane w czasie rzeczywistym i posortują oferty dla dwojga od najtańszej. Kliknij, by od razu przejść do rezerwacji:<br><br>
+       &#x25CF; <a href="https://www.skyscanner.pl/transport/loty/pl/everywhere/${skyDateOut}/${skyDateIn}/?adults=2&price=${budget}" target="_blank" style="color:var(--accent); font-weight:bold; text-decoration:underline;">&#x1F30D; Szukaj lotów WSZĘDZIE do kwoty ${budget} zł (Skyscanner Live)</a><br><br>
+       &#x25CF; <a href="https://www.wakacje.pl/wczasy/?od-${isoStart},do-${isoEnd},cena-do-${budget},dla-2-doroslych" target="_blank" style="color:var(--accent); font-weight:bold; text-decoration:underline;">&#x1F3D6;&#xFE0F; Przeszukaj pakiety All-Inclusive w Twoim budżecie (Wakacje.pl Live)</a>`;
+    } else {
+       suggestionHTML = `Nie podałeś dokładnego budżetu. Zbudowałem bezpośredni link do radaru najtańszych biletów w siatce tanich linii lotniczych na najbliższe tygodnie:<br><br>
+       &#x25CF; <a href="https://www.azair.eu/azfin.php?searchtype=flexi&srcAirport=Poland&dstAirport=Anywhere&adults=2&depdate=${isoStart}" target="_blank" style="color:var(--accent); font-weight:bold; text-decoration:underline;">&#x2708;&#xFE0F; Otwórz radar tanich lotów (Azair Live)</a>`;
+    }
+
+    res.innerHTML=`<div class="card card-p" style="background:var(--bg-tertiary);"><div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:8px;">&#x1F916; Twoje zapytania na żywo:</div><div style="font-size:13px;line-height:1.6;">${formatAIText(suggestionHTML)}</div></div>`;
+  }, 800);
 }
 
 function updateAIFreeFunds(){
@@ -2746,11 +2862,14 @@ async function markNotifRead(idx) {
 }
 
 /* ══ EMOJI PICKER ══ */
+// Kuloodporna generacja emoji (nie używa fizycznych znaków, omija błędy kodowania)
 const EMOJIS = {
-  'Miejsca & Podróże': ['✈️','🚂','🚗','🚕','🚌','🚎','🏎️','🚓','🚑','🚒','🚐','🚚','🚜','🛴','🚲','🛵','🏍️','🛺','🚠','🚟','🚁','🛸','🚀','🛶','⛵','🚤','🛳️','⛴️','🚢','🏠','🏡','🏢','🏣','🏤','🏥','🏦','🏨','🏩','🏪','🏫','🏬','🏭','🏯','🏰','💒','🗼','🗽','⛪','🕌','🕍','⛩️','🕋','⛺','🌅','🌄','🌇','🏙️','🌃'],
-  'Jedzenie': ['🍏','🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🍈','🍒','🍑','🥭','🍍','🥥','🥝','🍅','🍆','🥑','🥦','🥬','🥒','🌶️','🌽','🥕','🥔','🍠','🥐','🍞','🥖','🥨','🧀','🥚','🍳','🥞','🥓','🥩','🍗','🍖','🌭','🍔','🍟','🍕','🥪','🥙','🌮','🌯','🥗','🥘','🥫','🍝','🍜','🍲','🍛','🍣','🍱','🥟','🍤','🍙','🍚','🍘','🍥','🥠','🍢','🍡','🍧','🍨','🍦','🥧','🍰','🎂','🍮','🍭','🍬','🍫','🍿','🍩','🍪','🌰','🥜','🍯','🥛','☕','🍵','🥤','🍶','🍺','🍻','🥂','🍷','🥃','🍸','🍹','🍾'],
-  'Przedmioty': ['📱','📲','💻','⌨️','🖥️','🖨️','🖱️','🖲️','🕹️','🗜️','💽','💾','💿','📀','📼','📷','📸','📹','🎥','📽️','🎞️','📞','☎️','📟','📠','📺','📻','🎙️','🎚️','🎛️','🧭','⏱️','⏲️','⏰','🕰️','⌛','⏳','📡','🔋','🔌','💡','🔦','🕯️','🪔','🧯','🛢️','💸','💵','💴','💶','💷','💰','💳','💎','⚖️','🧰','🔧','🔨','⚒️','🛠️','⛏️','🔩','⚙️','🧱','⛓️','🧲','🔫','💣','🧨','🪓','🔪','🗡️','⚔️','🛡️','🚬','⚰️','⚱️','🏺','🔮','📿','🧿','💈','⚗️','🔭','🔬','🕳️','💊','💉','🩸','🩹','🩺','🚪','🛏️','🛋️','🪑','🚽','🚿','🛁','🪒','🧴','🧷','🧹','🧺','🧻','🧼','🧽','🛒'],
-  'Symbole': ['❤️','🧡','💛','💚','💙','💜','🖤','💔','❣️','💕','💞','💓','💗','💖','💘','💝','💟','☮️','✝️','☪️','🕉️','☸️','✡️','🔯','🕎','☯️','☦️','🛐','⛎','♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓','🆔','⚛️','🉑','☢️','☣️','📴','📳','🈶','🈚','🈸','🈺','🈷️','✴️','🆚','💮','🉐','㊙️','㊗️','🈴','🈵','🈹','🈲','🅰️','🅱️','🆎','🆑','🅾️','🆘','❌','⭕','🛑','⛔','📛','🚫','💯','💢','♨️','🚷','🚯','🚳','🚱','🔞','📵','🚭','❗','❕','❓','❔','‼️','⁉️','🔅','🔆','〽️','⚠️','🚸','🔱','⚜️','🔰','♻️','✅','🈯','💹','❇️','✳️','❎','🌐','💠','Ⓜ️','🌀','💤','🏧','🚾','♿','🅿️','🈳','🈂️','🛂','🛃','🛄','🛅','🚹','🚺','🚼','🚻','🚮','🎦','📶','🈁','🔣','ℹ️','🔤','🔡','🔠','🆖','🆗','🆙','🆒','🆕','🆓','0️⃣','1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣','🔟','🔢','#️⃣','*️⃣','⏏️','▶️','⏸️','⏯️','⏹️','⏺️','⏭️','⏮️','⏩','⏪','⏫','⏬','◀️','🔼','🔽','➡️','⬅️','⬆️','⬇️','↗️','↘️','↙️','↖️','↕️','↔️','↪️','↩️','⤴️','⤵️','🔀','🔁','🔂','🔄','🔃','🎵','🎶','➕','➖','➗','✖️','♾️','💲','💱','™️','©️','®️','👁️‍🗨️','🔚','🔙','🔛','🔝','🔜','〰️','➰','➿','✔️','☑️','🔘','🔴','🟠','🟡','🟢','🔵','🟣','⚫','⚪','🟫','🔺','🔻','🔸','🔹','🔶','🔷','🔳','🔲','▪️','▫️','◾','◽','◼️','◻️','🟥','🟧','🟨','🟩','🟦','🟪','⬛','⬜','🟫']
+  'Podróże': Array.from({length: 45}, (_, i) => String.fromCodePoint(0x1F680 + i)),
+  'Jedzenie': Array.from({length: 50}, (_, i) => String.fromCodePoint(0x1F345 + i)),
+  'Przedmioty': Array.from({length: 45}, (_, i) => String.fromCodePoint(0x1F4BA + i)),
+  'Emocje': Array.from({length: 55}, (_, i) => String.fromCodePoint(0x1F600 + i)),
+  'Zwierzęta': Array.from({length: 40}, (_, i) => String.fromCodePoint(0x1F400 + i)),
+  'Symbole': ['\u2764\uFE0F', '\uD83D\uDD25', '\u2B50', '\u2714\uFE0F', '\uD83D\uDEA8', '\u26A0\uFE0F', '\u2705', '\u274C']
 };
 
 let currentEmojiTargetBtn = null;
@@ -2858,40 +2977,59 @@ document.addEventListener('click', e => {
 /* ══ AI ENGINE (FULL CONVERSATIONAL & CONTEXT AWARE - SERVER-SIDE MOCK) ══ */
 // To zapytanie w wersji produkcyjnej powinno być kierowane na /api/ai gdzie leży ukryty klucz np. Anthropic Claude.
 // Tutaj symulujemy jego zaawansowane działanie w przeglądarce za pomocą zaawansowanego parsera RegExp i kontekstu.
+// ===========================================
+// SILNIK ASYSTENTA AI (Lokalna symulacja konwersacyjna)
+// ===========================================
 async function smartAIRequest(userPrompt) {
   const p = userPrompt.toLowerCase();
   const state = App.state;
   
-  // Opóźnienie symulujące prawdziwy LLM API (Server-Side)
+  // Opóźnienie symulujące prawdziwy LLM API
   await new Promise(r => setTimeout(r, 1200 + Math.random() * 800));
 
-  // Kontekstowa baza wiedzy aplikacji (RAG)
-  if(p.includes('ile wydałem') || p.includes('ile wydalem') || p.includes('moje wydatki') || p.includes('wydatki')) {
+  // 1. Finanse i Wydatki
+  if(p.includes('ile wydałem') || p.includes('ile wydalem') || p.includes('wydatki')) {
     const expenses = getMonthExpenses();
-    return `W tym miesiącu Twoje łączne wydatki wynoszą **${fmtNum(expenses)} zł**. Twój budżet to ${fmtNum(getMonthlyBudget())} zł, więc zostało Ci jeszcze ${fmtNum(getMonthlyBudget() - expenses)} zł. Oby tak dalej! 📉`;
+    return `W tym miesiącu Twoje wydatki to **${fmtNum(expenses)} zł**. Twój budżet to ${fmtNum(getMonthlyBudget())} zł, więc zostało Ci jeszcze ${fmtNum(getMonthlyBudget() - expenses)} zł. Oby tak dalej! &#x1F4C8;`;
   }
   
-  if(p.includes('na co mnie stać') || p.includes('podróż') || p.includes('gdzie moge poleciec') || p.includes('wakacje')) {
+  // 2. Podróże i Budżet wakacyjny
+  if(p.includes('na co mnie stać') || p.includes('podróż') || p.includes('wakacje')) {
     const savings = getSavings();
-    if(savings > 2000) return `Masz świetną sytuację finansową! (Wolne środki: **${fmtNum(savings)} zł**). Możesz spokojnie zaplanować **weekend w Barcelonie** (ok. 1200 zł za lot i hotel) lub wyjazd na południe Włoch. Zajrzyj do zakładki Podróże! ✈️`;
-    if(savings > 500) return `Zostało Ci **${fmtNum(savings)} zł**. To wystarczy na fajny city break w Polsce (np. Kraków lub Gdańsk pociągiem) albo loty Ryanairem na Węgry. Zarezerwuj mądrze! 🎒`;
-    return `Aktualnie masz niewiele wolnych środków w tym miesiącu (ok. ${fmtNum(savings)} zł). AI sugeruje zacisnąć pasa i zaplanować podróż w przyszłym miesiącu. Może odłożymy coś na cel? 🎯`;
+    if(savings > 2000) return `Masz świetną sytuację finansową! (Wolne środki: **${fmtNum(savings)} zł**). Możesz spokojnie zaplanować **weekend w Barcelonie** lub wyjazd na południe Włoch. Zajrzyj do zakładki Podróże! &#x2708;&#xFE0F;`;
+    if(savings > 500) return `Zostało Ci **${fmtNum(savings)} zł**. To wystarczy na fajny city break w Polsce (np. Kraków lub Gdańsk) albo tanie loty na Węgry. &#x1F3D6;&#xFE0F;`;
+    return `Aktualnie masz niewiele wolnych środków w tym miesiącu (${fmtNum(savings)} zł). Zalecam odłożenie planów wyjazdowych na kolejny miesiąc. &#x1F4B0;`;
   }
 
+  // 3. Garaż i Serwisy
   if(p.includes('serwis') || p.includes('auto') || p.includes('kiedy serwis')) {
-    if(!state.vehicles || state.vehicles.length === 0) return "Nie dodałeś jeszcze żadnego pojazdu w zakładce Garaż. Dodaj auto, abym mógł analizować interwały serwisowe! 🚗";
+    if(!state.vehicles || state.vehicles.length === 0) return "Nie dodałeś jeszcze żadnego pojazdu w zakładce Garaż. Dodaj auto, abym mógł analizować interwały serwisowe! &#x1F697;";
     const v = state.vehicles[0];
     const lastSvc = v.services?.length ? v.services.sort((a,b)=>new Date(b.date)-new Date(a.date))[0] : null;
-    if(lastSvc) return `Twój pojazd **${v.name}** miał ostatni serwis "${lastSvc.name}" przy przebiegu ${fmtNum(lastSvc.km)} km. Zazwyczaj zalecam wymianę oleju co 10-15 tys. km. Masz wpisany przebieg ${fmtNum(v.mileage)} km. Trzymaj rękę na pulsie! 🔧`;
-    return `Masz zapisany pojazd **${v.name}**, ale nie widzę żadnej historii serwisowej. Pamiętaj, aby dodać wymianę oleju do zakładki Garaż. Czysty silnik to długie życie! 🛢️`;
+    if(lastSvc) return `Twój pojazd **${v.name}** miał ostatni serwis "${lastSvc.name}" przy przebiegu ${fmtNum(lastSvc.km)} km. Zazwyczaj zalecam wymianę oleju co 10-15 tys. km. Trzymaj rękę na pulsie! &#x1F527;`;
+    return `Masz zapisany pojazd **${v.name}**, ale nie widzę żadnej historii serwisowej. Pamiętaj, aby wpisywać koszty w zakładce Garaż! &#x1F6E0;&#xFE0F;`;
   }
 
-  if(p.includes('podsumuj finanse') || p.includes('finanse') || p.includes('raport')) {
-    return `**Szybki Raport Finansowy Lumina:**\n\n💰 Saldo główne: **${fmtNum(state.balance)} zł**\n📥 Przychody mies.: ${fmtNum(getMonthIncome())} zł\n📤 Wydatki mies.: ${fmtNum(getMonthExpenses())} zł\n📈 Potencjał oszczędności: **${fmtNum(getSavings())} zł**\n\nŚwietnie kontrolujesz budżet. Twoje największe wydatki zazwyczaj lądują w zakładce ${getBudgetCategories().sort((a,b)=>b.spent-a.spent)[0]?.name || 'Zakupy'}.`;
+  // 4. Podsumowanie finansów
+  if(p.includes('podsumuj') || p.includes('raport')) {
+    return `**Szybki Raport Lumina:**<br>Saldo: **${fmtNum(state.balance)} zł**<br>Przychody mies.: ${fmtNum(getMonthIncome())} zł<br>Wydatki mies.: ${fmtNum(getMonthExpenses())} zł<br><br>Świetnie kontrolujesz budżet! &#x1F4B8;`;
   }
 
-  // Fallback konwersacyjny
-  return `Oto odpowiedź Lumina AI (Server-Side) na Twoje zapytanie: "${userPrompt}". Widzę Twoje dane lokalne i chronię je przez AES-GCM. Jako zaawansowany asystent mogę analizować portfel, doradzać ubezpieczenia, wyliczać raty i śledzić usterki (OBD2). W czym jeszcze pomóc? 🤖`;
+  // 5. Zdrowie (Dodana nowa obsługa)
+  if(p.includes('zdrowia') || p.includes('zdrowie') || p.includes('kroki') || p.includes('sen')) {
+    const log = state.healthLog.slice(0,7);
+    const avgSteps = log.length ? Math.round(log.reduce((s,h)=>s+(h.steps||0),0)/log.length) : 0;
+    if(avgSteps > 0) return `Z Twoich danych wynika, że robisz średnio **${avgSteps} kroków** dziennie. To świetny wynik! Pamiętaj też o wypijaniu min. 2.5 litra wody i regularnym śnie. &#x1F3C3;&#x200D;&#x2642;&#xFE0F;&#x2764;&#xFE0F;`;
+    return `Aby przeprowadzić rzetelną analizę, potrzebuję danych. Zapisz swoje kroki, sen i nawodnienie w zakładce Zdrowie, a ja przygotuję dla Ciebie statystyki! &#x1F34E;`;
+  }
+
+  // 6. Oszczędzanie (Dodana nowa obsługa)
+  if(p.includes('oszczędzać') || p.includes('oszczedzac') || p.includes('cel')) {
+    return `Najlepszą strategią na szybsze oszczędzanie jest **metoda 50/30/20** (50% wydatki stałe, 30% przyjemności, 20% oszczędności). Twoje aktualne wolne środki to **${fmtNum(getSavings())} zł**. Spróbuj ustawić stałe zlecenie na konto oszczędnościowe zaraz po wypłacie! &#x1F3AF;`;
+  }
+
+  // 7. Naturalny Fallback (Zamiast robociej regułki)
+  return `Zrozumiałem. Analizuję to pod kątem Twoich danych lokalnych (szyfrowanych przez AES-GCM). Jako asystent staram się łączyć Twoje finanse, zdrowie i codzienne obowiązki. Możesz zapytać mnie o stan budżetu, przypomnienia serwisowe auta lub sugestie podróżnicze! &#x1F916;`;
 }
 
 function formatAIText(text){
