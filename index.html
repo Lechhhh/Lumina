@@ -17,6 +17,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
+  /* Wymuszenie wyświetlania okienka resetu na samym wierzchu, nad wszystkimi innymi modalami */
+#confirm-reset-modal {
+  z-index: 3000 !important;
+}
 :root {
   --bg-primary:#f5f5f7;--bg-secondary:#ffffff;--bg-tertiary:#fbfbfd;
   --bg-elevated:rgba(255,255,255,0.85);--bg-glass:rgba(255,255,255,0.72);
@@ -1364,7 +1368,24 @@ textarea.form-field{resize:vertical;min-height:88px;}
     <div class="modal-body" id="notifications-list"><div class="text-sm text-muted" style="text-align:center;padding:20px 0;">Brak nowych powiadomień</div></div>
   </div>
 </div>
-
+<div class="modal-overlay" id="confirm-reset-modal" onclick="backdropClose(event,this)">
+  <div class="modal-sheet"><div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title" style="color:var(--accent-red);">⚠️ Wymagane potwierdzenie</div>
+      <button class="btn-icon" onclick="closeModal('confirm-reset-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:15px; line-height:1.6; color:var(--text-primary); text-align:center; padding:10px 0;">
+        <strong>Czy na pewno chcesz usunąć wszystkie dane?</strong><br><br>
+        <span class="text-sm text-muted">Tej operacji nie da się cofnąć – stracisz całą historię transakcji, wpisy w garażu, listę zakupów i cele finansowe.</span>
+      </div>
+    </div>
+    <div class="modal-footer" style="justify-content:center; gap:12px; padding-bottom:20px;">
+      <button class="btn btn-secondary" style="flex:1;" onclick="closeModal('confirm-reset-modal')">Anuluj</button>
+      <button class="btn btn-danger" style="flex:1;" onclick="executeHardReset()">Tak, usuń wszystko</button>
+    </div>
+  </div>
+</div>
 <div class="modal-overlay" id="settings-modal" onclick="backdropClose(event,this)">
   <div class="modal-sheet"><div class="modal-handle"></div>
     <div class="modal-header"><div class="modal-title">⚙️ Ustawienia</div><button class="btn-icon" onclick="closeModal('settings-modal')">✕</button></div>
@@ -1373,6 +1394,24 @@ textarea.form-field{resize:vertical;min-height:88px;}
       <div class="tx-item"><div class="tx-icon-wrap" style="background:var(--accent-green-light);">🔐</div><div class="tx-info"><div class="tx-name">Bezpieczeństwo E2EE</div><div class="tx-meta">AES-GCM-256 · PBKDF2 · Zero-Knowledge</div></div><span class="badge badge-green">Aktywne</span></div>
       <div class="tx-item"><div class="tx-icon-wrap" style="background:var(--accent-red-light);">🚪</div><div class="tx-info"><div class="tx-name">Wyloguj się</div><div class="tx-meta" id="logout-email-display">—</div></div><button class="btn btn-danger btn-sm" onclick="doLogout()">Wyloguj</button></div>
       <div class="tx-item"><div class="tx-icon-wrap" style="background:var(--bg-input);">📦</div><div class="tx-info"><div class="tx-name">Eksport danych</div><div class="tx-meta">Pobierz kopię JSON (zaszyfrowaną)</div></div><button class="btn btn-secondary btn-sm" onclick="exportData();closeModal('settings-modal')">Eksport</button></div>
+      <div class="tx-item">
+            <div class="tx-icon-wrap" style="background:var(--accent-light);">📂</div>
+            <div class="tx-info">
+              <div class="tx-name">Import kopii zapasowej</div>
+              <div class="tx-meta">Załaduj pobrany wcześniej plik JSON z danymi</div>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('backup-file-input').click()">Import</button>
+            <input type="file" id="backup-file-input" accept=".json" class="hidden" onchange="importBackupJSON(this)">
+          </div>
+
+          <div class="tx-item">
+            <div class="tx-icon-wrap" style="background:var(--accent-red-light);">🗑️</div>
+            <div class="tx-info">
+              <div class="tx-name">Resetowanie konta</div>
+              <div class="tx-meta">Trwale usuń wszystkie dane z pamięci tego urządzenia</div>
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="clearAllUserData()">Wyczyść</button>
+          </div>
       <div class="divider"></div>
       <div style="font-size:12px;color:var(--text-tertiary);text-align:center;line-height:1.8;">Lumina Smart Life OS v5.0<br>PWA · E2EE AES-GCM-256 · PBKDF2<br>Local-First · Zero-Knowledge · Open Architecture<br>© 2026 Lumina Technologies</div>
     </div>
@@ -3198,6 +3237,64 @@ if ('requestIdleCallback' in window) {
 /* 3. Optymalizacja renderowania powiadomień (przerzucenie do następnej klatki) */
 const originalShowToast = typeof showToast === 'function' ? showToast : function(){};
 showToast = (type, icon, msg) => requestAnimationFrame(() => originalShowToast(type, icon, msg));
+
+// =======================================================
+// SYSTEM ZARZĄDZANIA KOPIAMI: CZYSZCZENIE I IMPORT DANYCH
+// =======================================================
+
+// 1. Czyszczenie danych z natywnym zapytaniem potwierdzającym Tak/Nie
+// Otwiera nasze nowe, dedykowane okienko zamiast systemowego alertu
+function clearAllUserData() {
+  showModal('confirm-reset-modal');
+}
+
+// Wykonuje fizyczne czyszczenie dopiero po kliknięciu "Tak, usuń wszystko"
+async function executeHardReset() {
+  // Przywrócenie czystego szablonu stanu
+  App.state = FRESH_STATE();
+  await saveState();
+  
+  // Zamykanie okienek i odświeżanie UI
+  closeModal('confirm-reset-modal');
+  closeModal('settings-modal');
+  renderAll();
+  updateStats();
+  if (typeof initCharts === 'function') initCharts();
+  
+  showToast('error', '🗑️', 'Wszystkie dane zostały pomyślnie usunięte.');
+}
+
+// 2. Ładowanie i parsowanie struktury pliku wyeksportowanego z Lumina
+function importBackupJSON(input) {
+  if (!input.files || !input.files[0]) return;
+  
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    try {
+      const importedData = JSON.parse(e.target.result);
+      
+      // Prosta weryfikacja czy wgrywany plik to poprawny obiekt stanu Lumina
+      if (importedData && (Array.isArray(importedData.transactions) || Array.isArray(importedData.vehicles))) {
+        App.state = importedData;
+        await saveState();
+        
+        // Przeładowanie całego interfejsu z nowymi danymi
+        closeModal('settings-modal');
+        renderAll();
+        updateStats();
+        if (typeof initCharts === 'function') initCharts();
+        
+        showToast('success', '✅', 'Kopia zapasowa została załadowana poprawnie!');
+      } else {
+        showToast('error', '⚠️', 'Błędny format pliku. To nie jest prawidłowa kopia Lumina.');
+      }
+    } catch (err) {
+      showToast('error', '⚠️', 'Nie udało się odczytać pliku JSON.');
+    }
+    input.value = ''; // Wyczyszczenie inputu pliku
+  };
+  reader.readAsText(input.files[0]);
+}
 
 </script>
 </body>
