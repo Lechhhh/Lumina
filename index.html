@@ -2492,23 +2492,17 @@ async function addService() {
   document.getElementById('svc-cost').value='';
   document.getElementById('svc-notes').value='';
 }
-
 async function analyzeOBD() {
   const code = document.getElementById('obd-code').value.trim().toUpperCase();
   const res = document.getElementById('obd-result');
   if(!code) return;
   res.innerHTML='<div class="card card-p mt-12"><div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
-  
-  // Pseudo-AI OBD2 logic bez wymogu zewnętrznego API
-  setTimeout(()=>{
-    let msg, cost, ok=false;
-    if(code.includes('P0171')){ msg='Zbyt uboga mieszanka paliwowa (Bank 1). Sprawdź przepływomierz (MAF) lub szczelność dolotu.'; cost='150 - 400 zł'; }
-    else if(code.includes('P0300')){ msg='Wypadanie zapłonów na wielu cylindrach. Wymień świece lub cewki zapłonowe.'; cost='200 - 800 zł'; }
-    else if(code.includes('01314')){ msg='Błąd komunikacji z modułem sterującym silnika (ECU). Często problem z wiązką lub CAN.'; cost='Od 300 zł (diagnoza)'; }
-    else { msg=`Zidentyfikowano błąd ${code}. Zalecana diagnostyka komputerowa warsztatowa.`; cost='~150 zł (diagnoza)'; ok=true; }
-    
-    res.innerHTML=`<div class="obd-result-card ${ok?'ok':'critical'}"><div class="font-bold mb-4">Wynik AI dla ${code}</div><div class="text-sm mb-8">${msg}</div><div class="text-sm font-medium">Szacowany koszt: ${cost}</div></div>`;
-  }, 1000);
+
+  // Prawdziwe zapytanie do Twojego wbudowanego modułu AI
+  const prompt = `Jako ekspert motoryzacyjny i diagnosta, wyjaśnij szczegółowo kod błędu OBD2 / VCDS: ${code}. Podaj potencjalne przyczyny usterki i szacowany koszt naprawy. Bądź zwięzły, użyj formatowania HTML i emoji.`;
+  const reply = await smartAIRequest(prompt);
+
+  res.innerHTML=`<div class="obd-result-card ok" style="background:var(--accent-purple-light);border-color:rgba(191,90,242,0.3);"><div class="font-bold mb-4" style="color:var(--accent-purple);">🤖 Analiza AI dla błędu ${code}</div><div class="text-sm" style="line-height:1.6; color:var(--text-primary);">${formatAIText(reply)}</div></div>`;
 }
 
 function renderGarageChart() {
