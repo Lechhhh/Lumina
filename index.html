@@ -68,7 +68,24 @@
   --shadow-lg:0 12px 40px rgba(0,0,0,0.5);--shadow-xl:0 24px 64px rgba(0,0,0,0.6);
   --shadow-card:0 2px 8px rgba(0,0,0,0.3),0 0 0 0.5px rgba(255,255,255,0.06);
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+*,*::before,*::after {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+  touch-action: manipulation; /* Usuwa 300ms laga przy dotyku na iOS! */
+}
+
+/* Wymuszenie sprzętowej akceleracji GPU dla najcięższych elementów */
+#top-header, #bottom-nav, #sidebar, .modal-sheet, .toast {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Izolacja nieaktywnych zakładek - przeglądarka przestaje je w ogóle przeliczać */
+.tab-content {
+  contain: content; 
+}
 html{font-size:16px;-webkit-text-size-adjust:100%;}
 body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background var(--transition-slow),color var(--transition-slow);}
 button{font-family:inherit;cursor:pointer;border:none;background:none;}
@@ -1650,18 +1667,29 @@ function updateStats() {
 
 /* ══ NAVIGATION ══ */
 function switchTab(name) {
-  document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
-  const t=document.getElementById('tab-'+name); if(t) t.classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===name));
-  document.querySelectorAll('.bnav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===name));
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(name==='wallet'){renderBudgetCategories();updateStats();}
-  if(name==='market'){loadMarketData();loadCryptoData();}
-  if(name==='health'){renderHealthChart();updateWellnessScore();}
-  if(name==='goals') renderGoals();
-  if(name==='subscriptions'){renderSubscriptions();updateStats();}
-  if(name==='shopping') renderShoppingList();
-  if(name==='housing') calcHousing();
+  // 1. Natychmiastowa zmiana klas UI (zablokowanie laga wizualnego)
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
+    const t=document.getElementById('tab-'+name); if(t) t.classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===name));
+    document.querySelectorAll('.bnav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===name));
+    
+    // Smooth scrolling przy zmianie ciężkiego DOMu to zabójca FPS. Zmieniamy na 'instant'.
+    window.scrollTo({top:0, behavior:'instant'}); 
+
+    // 2. Opóźnienie ładowania ciężkich wykresów i danych do kolejnej klatki (Gwarancja 120FPS)
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        if(name==='wallet'){renderBudgetCategories();updateStats();}
+        if(name==='market'){loadMarketData();loadCryptoData();}
+        if(name==='health'){renderHealthChart();updateWellnessScore();}
+        if(name==='goals') renderGoals();
+        if(name==='subscriptions'){renderSubscriptions();updateStats();}
+        if(name==='shopping') renderShoppingList();
+        if(name==='housing') calcHousing();
+      }, 0);
+    });
+  });
 }
 
 /* ══ THEME ══ */
